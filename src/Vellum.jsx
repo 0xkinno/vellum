@@ -811,17 +811,29 @@ function Create({ onPublish }) {
 
 function Claim({ published }) {
   const { address, isConnected } = useAccount();
-  const token = published ? published.token : "VLM";
   const [campaignId, setCampaignId] = useState(published?.id ?? null);
+  const [camps, setCamps] = useState([]);
   const [phase, setPhase] = useState("waiting"); // waiting | decrypting | revealed | claiming
   const [data, setData] = useState(null); // { allocation, claimed, camp }
   const [err, setErr] = useState("");
   const [nowSec, setNowSec] = useState(Math.floor(Date.now() / 1000));
+  const tokenSym = (addr) => DIST_TOKENS.find((t) => t.address && addr && t.address.toLowerCase() === addr.toLowerCase())?.sym || "tokens";
+  const selCamp = camps.find((c) => c.id === campaignId);
+  const token = data?.camp ? tokenSym(data.camp.token) : selCamp ? tokenSym(selCamp.token) : (published ? published.token : "tokens");
 
   useEffect(() => {
-    if (published?.id) { setCampaignId(published.id); return; }
-    latestCampaignId().then((n) => n && setCampaignId(n)).catch(() => {});
+    listCampaigns().then((list) => {
+      setCamps(list);
+      setCampaignId((cur) => cur ?? published?.id ?? (list[0] ? list[0].id : null));
+    }).catch(() => {});
   }, [published]);
+
+  const pickCampaign = (id) => {
+    setCampaignId(id);
+    setPhase("waiting");
+    setData(null);
+    setErr("");
+  };
 
   useEffect(() => {
     if (!data || !data.camp || data.camp.duration === 0) return;
@@ -875,7 +887,10 @@ function Claim({ published }) {
       <p className="app-sub">Recipient lens — {isConnected ? <>connected as <span style={{ fontFamily: "var(--mono)", fontSize: 13 }}>{shortAddr}</span>{campaignId ? ` · campaign #${campaignId}` : ""}</> : "connect your wallet to decrypt your line."}</p>
       <div className="panel" style={{ marginTop: 26, maxWidth: 560 }}>
         <div className="panel-h">
-          <h3>{camp ? ["Airdrop", "Vesting", "Disperse"][camp.kind] : (published ? published.type : "Distribution")} · {token}</h3>
+          <select className="inp" style={{ maxWidth: 300, fontWeight: 600 }} value={campaignId ?? ""} onChange={(e) => pickCampaign(Number(e.target.value))}>
+            {!camps.length && <option value="">No campaigns yet</option>}
+            {camps.map((c) => <option key={c.id} value={c.id}>#{c.id} · {c.title || ["Airdrop", "Vesting", "Disperse"][c.kind]}</option>)}
+          </select>
           <a className="btn btn-ghost btn-sm" href={`${ETHERSCAN}/address/${DISTRIBUTOR}`} target="_blank" rel="noreferrer">Public view <ArrowUpRight size={13} /></a>
         </div>
         <div style={{ padding: "30px 22px" }}>
