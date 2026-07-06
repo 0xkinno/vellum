@@ -1,0 +1,27 @@
+{
+  "name": "vellum",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Vellum — confidential token distribution on the Zama Protocol",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview --port 4173"
+  },
+  "dependencies": {
+    "@reown/appkit": "^1.8.21",
+    "@reown/appkit-adapter-wagmi": "^1.8.21",
+    "@tanstack/react-query": "^5.101.2",
+    "@zama-fhe/relayer-sdk": "^0.4.4",
+    "lucide-react": "0.383.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "viem": "^2.54.3",
+    "wagmi": "^3.6.21"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^5.4.11"
+  }
+}
