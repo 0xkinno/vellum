@@ -1,4 +1,4 @@
-import { DeployFunction } from "hardhat-deploy/types";
+﻿import { DeployFunction } from "hardhat-deploy/types";
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 
 // Deploys the bundled confidential token + the multi-campaign distributor.

@@ -11,9 +11,9 @@ interface IERC7984 {
 }
 
 /// @title  VellumDistributor
-/// @author Vellum — Zama Developer Program S3
+/// @author Vellum  Zama Developer Program S3
 /// @notice Multi-campaign confidential distribution over any ERC-7984 token. One deployment
-///         runs unlimited rounds in three modes — Airdrop, Vesting (cliff + linear), Disperse.
+///         runs unlimited rounds in three modes  Airdrop, Vesting (cliff + linear), Disperse.
 ///         Amounts are encrypted euint64 handles; the public sees handles, the operator can
 ///         reconcile encrypted totals, and each recipient decrypts only their own line.
 contract VellumDistributor is ZamaEthereumConfig {
@@ -40,7 +40,7 @@ contract VellumDistributor is ZamaEthereumConfig {
     uint256 public campaignCount;
     mapping(uint256 => Campaign) public campaigns;
 
-    // Encrypted per-campaign accounting (operator-decryptable → provable, sealed solvency).
+    // Encrypted per-campaign accounting (operator-decryptable => provable, sealed solvency).
     mapping(uint256 => euint64) private _funded;
     mapping(uint256 => euint64) private _totalAllocated;
 
