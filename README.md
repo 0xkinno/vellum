@@ -21,6 +21,7 @@ This is the primitive every token organisation needs and almost none have: not a
 | Resource | Where |
 |---|---|
 | **Live app** | https://vellum-delta-plum.vercel.app/ |
+| **Video pitch** | https://youtu.be/7yZL8fQr4HE?si=kt-dHcPyYyHja-0K |
 | **VellumDistributor** (multi-campaign engine) | Sepolia `0x96D6D31891C91eb57b144c86b87c957F31BFceb2` |
 | **VellumToken** (ERC-7984 demo token + faucet) | Sepolia `0x2f0Aed55D754fbD6bf34fAbdc28a474ad0718722` |
 | **VellumcUSD** (OpenZeppelin ERC-7984 wrapper) | Sepolia `0xce022cd101a29f635aC25693dCC7093E335B0519` |
